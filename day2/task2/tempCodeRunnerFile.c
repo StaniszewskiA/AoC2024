@@ -1,0 +1,1 @@
+bool is_good_with_one_removed(int levels[], int length)
