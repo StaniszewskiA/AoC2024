@@ -48,20 +48,18 @@ int main() {
 
     while (fgets(line, sizeof(line), file) != NULL) {
         if (line[0] == '\n') {
-            continue;  // Skip empty lines
+            continue; 
         }
 
         int levels[REPORT_LENGTH];
         int length = 0;
 
-        // Tokenize the line to extract the levels
         char *token = strtok(line, " \n");
         while (token != NULL) {
             levels[length++] = atoi(token);
             token = strtok(NULL, " \n");
         }
 
-        // Check if the sequence is good
         if (is_good(levels, length)) {
             p1++;
         }
@@ -69,7 +67,6 @@ int main() {
 
     fclose(file);
 
-    // Output the result
     printf("Number of good reports (p1): %d\n", p1);
 
     return 0;
