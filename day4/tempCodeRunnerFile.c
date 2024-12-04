@@ -1,0 +1,1 @@
+void count_patterns(char grid[MAX_ROWS][MAX_COLS], int rows, int cols)
