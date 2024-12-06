@@ -6,8 +6,6 @@
 #define MAX_ROWS 150
 #define MAX_COLS 150
 
-extern int dirs_task_2[4][2];
-
 bool will_loop(
     char input_grid[MAX_ROWS][MAX_COLS],
     int rows,

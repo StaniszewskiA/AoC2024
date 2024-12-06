@@ -1,8 +1,7 @@
 #include "task1.h"
 
-int dirs_task_1[4][2] = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
-
 void task1(char input_grid[MAX_ROWS][MAX_COLS], int rows, int cols) {
+    int dirs[4][2] = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
     int i, j;
     bool found = false;
 
@@ -28,8 +27,8 @@ void task1(char input_grid[MAX_ROWS][MAX_COLS], int rows, int cols) {
             result++;
         }
 
-        int next_i = i + dirs_task_1[curr_dir][0];
-        int next_j = j + dirs_task_1[curr_dir][1];
+        int next_i = i + dirs[curr_dir][0];
+        int next_j = j + dirs[curr_dir][1];
 
         if (next_i < 0 || next_i >= rows || next_j < 0 || next_j >= cols) {
             break;

@@ -1,6 +1,7 @@
+#include "task1.h"
 #include "task2.h"
 
-int dirs_task_2[4][2] = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+int dirs[4][2] = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
 
 bool will_loop(
     char input_grid[MAX_ROWS][MAX_COLS],
@@ -19,7 +20,7 @@ bool will_loop(
 
     int i = initial_i, j = initial_j;
     int dir = 0;
-    bool seen[MAX_ROWS][MAX_COLS][4] = {{{false}}}; // [4] stems from the need to consider the dirs_task_2
+    bool seen[MAX_ROWS][MAX_COLS][4] = {{{false}}}; // [4] stems from the need to consider the dirs
 
     while (true) {
         if (seen[i][j][dir]) {
@@ -28,8 +29,8 @@ bool will_loop(
         }
         seen[i][j][dir] = true;
 
-        int next_i = i + dirs_task_2[dir][0];
-        int next_j = j + dirs_task_2[dir][1];
+        int next_i = i + dirs[dir][0];
+        int next_j = j + dirs[dir][1];
 
         if (next_i < 0 || next_i >= rows || next_j < 0 || next_j >= cols) {
             input_grid[obstruction_i][obstruction_j] = '.';  
@@ -73,8 +74,8 @@ void task2(char input_grid[MAX_ROWS][MAX_COLS], int rows, int cols) {
             original_seen_count++;
         }
 
-        int next_i = i + dirs_task_2[curr_dir][0];
-        int next_j = j + dirs_task_2[curr_dir][1];
+        int next_i = i + dirs[curr_dir][0];
+        int next_j = j + dirs[curr_dir][1];
 
         if (next_i < 0 || next_i >= rows || next_j < 0 || next_j >= cols) {
             break;
