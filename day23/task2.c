@@ -12,7 +12,7 @@ int checkAllCombinationsOfR(int arr[], int n, int r, int idx, int data[], int i)
 int checkCombination(int* combination, int size);
 int compare(const void *a, const void *b);
 void readInput();
-void processClique(int *bestCliqueLength, int *bestCliqueIndex);
+void processClique(int *bestCliqueLength, int *bestCliqueidx);
 
 int adj_mat[ALPHABET * ALPHABET][ALPHABET * ALPHABET] = {0};
 int connectionLists[ALPHABET * ALPHABET][ALPHABET * ALPHABET];
@@ -25,14 +25,14 @@ int main() {
     readInput();
 
     int bestCliqueLength = 0;
-    int bestCliqueIndex = 0;
+    int bestCliqueidx = 0;
     
-    processClique(&bestCliqueLength, &bestCliqueIndex);
+    processClique(&bestCliqueLength, &bestCliqueidx);
 
-    qsort(cliques[bestCliqueIndex], bestCliqueLength, sizeof(int), compare);
+    qsort(cliques[bestCliqueidx], bestCliqueLength, sizeof(int), compare);
 
     for (int i = 0; i < bestCliqueLength; i++) {
-        printf("%c%c", (cliques[bestCliqueIndex][i] / ALPHABET) + 'a', (cliques[bestCliqueIndex][i] % ALPHABET) + 'a');
+        printf("%c%c", (cliques[bestCliqueidx][i] / ALPHABET) + 'a', (cliques[bestCliqueidx][i] % ALPHABET) + 'a');
         if (i != bestCliqueLength-1) {
             printf(",");
         }
@@ -47,25 +47,25 @@ void readInput() {
         char label1[2];
         char label2[2];
         fscanf(fin, "%2c-%2c ", &label1, &label2);
-        int index1 = ALPHABET * (label1[0]-'a') + (label1[1]-'a');
-        int index2 = ALPHABET * (label2[0]-'a') + (label2[1]-'a');
-        adj_mat[index1][index2] = 1;
-        adj_mat[index2][index1] = 1;
-        connectionLists[index1][connectionListLenghts[index1]++] = index2;
-        connectionLists[index2][connectionListLenghts[index2]++] = index1;
+        int idx1 = ALPHABET * (label1[0]-'a') + (label1[1]-'a');
+        int idx2 = ALPHABET * (label2[0]-'a') + (label2[1]-'a');
+        adj_mat[idx1][idx2] = 1;
+        adj_mat[idx2][idx1] = 1;
+        connectionLists[idx1][connectionListLenghts[idx1]++] = idx2;
+        connectionLists[idx2][connectionListLenghts[idx2]++] = idx1;
     }
 
     fclose(fin);
 }
 
-void processClique(int *bestCliqueLength, int *bestCliqueIndex) {
+void processClique(int *bestCliqueLength, int *bestCliqueidx) {
     for (int i = 0; i < ALPHABET*ALPHABET; i++) {
         if (connectionListLenghts[i] != 0) {
             cliqueLengths[i] = checkAllCombinations(connectionLists[i], connectionListLenghts[i], cliques[i]);
             cliques[i][cliqueLengths[i]++] = i;
             if (cliqueLengths[i] > *bestCliqueLength) {
                 *bestCliqueLength = cliqueLengths[i];
-                *bestCliqueIndex = i;
+                *bestCliqueidx = i;
             }
         }
     }
