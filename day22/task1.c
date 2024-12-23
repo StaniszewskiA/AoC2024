@@ -10,7 +10,7 @@ int main() {
 
     long long secret;
     long long tmp;
-    long long sum=0;
+    long long res = 0;
 
     while(fscanf(fin, "%lld", &secret) == 1) {
         for (int i = 0; i < SECRETS_AMOUNT; i++) {
@@ -20,11 +20,11 @@ int main() {
 
             secret = tmp;
         }
-        sum += secret;
+        res += secret;
     }
 
     fclose(fin);
-    printf("%lld\n", sum);
+    printf("%lld\n", res);
 
     return 0;
 }
